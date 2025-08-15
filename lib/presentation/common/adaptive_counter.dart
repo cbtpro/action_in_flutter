@@ -29,8 +29,8 @@ class _AdaptiveCounterState extends State<AdaptiveCounter> {
           Text('$_counter', style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle),
           const SizedBox(height: 16),
           CupertinoButton.filled(
-            child: const Icon(CupertinoIcons.add),
             onPressed: _incrementCounter,
+            child: const Icon(CupertinoIcons.add),
           ),
         ],
       );
