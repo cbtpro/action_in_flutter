@@ -1,5 +1,5 @@
-import 'dart:io' show Platform;
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:action_in_flutter/utils/device/platform_utils.dart';
+import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:action_in_flutter/presentation/common/adaptive_counter.dart';
@@ -12,12 +12,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  bool get isCupertino {
+    return !kIsWeb &&
+        (defaultTargetPlatform == TargetPlatform.iOS ||
+         defaultTargetPlatform == TargetPlatform.macOS);
+  }
+
   @override
   Widget build(BuildContext context) {
     const title = '首页';
 
-    // iOS 或 macOS 用 Cupertino 风格
-    if (!kIsWeb && (Platform.isIOS || Platform.isMacOS)) {
+    if (isCupertino) {
       return CupertinoApp(
         debugShowCheckedModeBanner: false,
         builder: (context, child) {
@@ -34,9 +39,7 @@ class MyApp extends StatelessWidget {
         },
         home: const MyHomePage(title: title),
       );
-    }
-    // Android / Windows / Web 用 Material 风格
-    else {
+    } else {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
@@ -56,8 +59,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Cupertino 平台
-    if (!kIsWeb && (Platform.isIOS || Platform.isMacOS)) {
+    if (PlatformUtils.isCupertino) {
       final cupertinoTheme = CupertinoTheme.of(context);
       return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
@@ -69,9 +71,7 @@ class MyHomePage extends StatelessWidget {
         ),
         child: const SafeArea(child: Center(child: AdaptiveCounter())),
       );
-    }
-    // Material 平台（Android / Windows / Web / 其他）
-    else {
+    } else {
       final theme = Theme.of(context);
       return Scaffold(
         appBar: AppBar(

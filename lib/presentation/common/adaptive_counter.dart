@@ -1,5 +1,4 @@
-import 'package:flutter/foundation.dart'
-    show kIsWeb, defaultTargetPlatform, TargetPlatform;
+import 'package:action_in_flutter/utils/device/platform_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,24 +18,16 @@ class _AdaptiveCounterState extends State<AdaptiveCounter> {
     });
   }
 
-  bool get isCupertino {
-  // 仅 iOS / macOS（非 Web）用 Cupertino 风格
-  return !kIsWeb &&
-      (defaultTargetPlatform == TargetPlatform.iOS ||
-       defaultTargetPlatform == TargetPlatform.macOS);
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (isCupertino) {
-      final cupertinoTheme = CupertinoTheme.of(context);
+    if (PlatformUtils.isCupertino) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text('你点击了多少次按钮：'),
           Text(
             '$_counter',
-            style: cupertinoTheme.textTheme.navLargeTitleTextStyle,
+            style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
           ),
           const SizedBox(height: 16),
           CupertinoButton.filled(
@@ -46,12 +37,11 @@ class _AdaptiveCounterState extends State<AdaptiveCounter> {
         ],
       );
     } else {
-      final theme = Theme.of(context);
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text('你点击了多少次按钮：'),
-          Text('$_counter', style: theme.textTheme.headlineMedium),
+          Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 16),
           FloatingActionButton(
             onPressed: _incrementCounter,
