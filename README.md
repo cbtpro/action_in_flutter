@@ -20,3 +20,47 @@
 flutter pub get
 dart run names_launcher:change
 ```
+
+## 目录结构
+
+```
+lib/
+├─ di/                        // 依赖注入相关
+│  ├─ injection.dart          // 全局依赖注册入口
+│  └─ modules/                // 按模块拆分依赖注册（可选）
+│     └─ post_module.dart
+│
+├─ core/                      // 核心功能、全局工具
+│  ├─ utils/                  // 工具类、扩展方法
+│  ├─ constants/              // 全局常量
+│  └─ data/network/           // 网络请求相关
+│     ├─ dio/                 // Dio 配置、拦截器
+│     └─ rest_client.dart
+│
+├─ data/                      // 数据层：Repository、API、数据源
+│  ├─ network/                // API 接口定义
+│  │  └─ post_api.dart
+│  └─ repository/             // 数据仓库实现
+│     └─ post_repository.dart
+│
+├─ domain/                    // 业务层：实体、UseCase
+│  ├─ entity/                 // 实体类
+│  │  └─ post/                // post 相关实体
+│  │     ├─ post.dart
+│  │     └─ post_list.dart
+│  └─ usecase/                // 用例
+│     └─ get_posts.dart
+│
+├─ presentation/              // UI 层：页面、组件、状态管理
+│  ├─ post/                   // post 模块
+│  │  ├─ store/               // MobX / Provider / Riverpod 等状态管理
+│  │  │  └─ post_store.dart
+│  │  ├─ page/                // 页面
+│  │  │  └─ post_page.dart
+│  │  └─ widgets/             // 可复用组件
+│  │     └─ post_item_widget.dart
+│  └─ common/                 // 全局组件
+│     └─ counter_widget.dart
+│
+└─ main.dart                  // 程序入口
+```
