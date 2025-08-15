@@ -4,6 +4,16 @@ description: "A new Flutter project."
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
+names_launcher:
+  name:
+    default: "我的 Flutter 应用"
+    en: "My Flutter App"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
+
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
@@ -34,6 +44,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  names_launcher: ^0.0.2
 
 dev_dependencies:
   flutter_test:

@@ -1,16 +1,22 @@
 # action_in_flutter
 
-A new Flutter project.
+一个新的 Flutter 项目。
 
-## Getting Started
+## 入门指南
 
-This project is a starting point for a Flutter application.
+此项目是一个 Flutter 应用的起点。
 
-A few resources to get you started if this is your first Flutter project:
+如果这是你第一次接触 Flutter，这里有一些入门资源可以参考：
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+* [实验：编写你的第一个 Flutter 应用](https://docs.flutter.dev/get-started/codelab)
+* [食谱：实用的 Flutter 示例](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+想要了解更多关于 Flutter 开发的帮助，请查看
+[在线文档](https://docs.flutter.dev/)，其中提供了教程、示例、移动开发指南以及完整的 API 参考。
+
+使用[`names_launcher`](https://pub.dev/packages/names_launcher)修改 ios、安卓应用名称
+
+```shell
+flutter pub get
+dart run names_launcher:change
+```
