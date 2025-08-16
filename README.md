@@ -64,3 +64,69 @@ lib/
 │
 └─ main.dart                  // 程序入口
 ```
+
+## 编译运行
+
+### WEB
+
+#### 运行命令
+
+使用 flutter run来运行项目，选择 chrome，可以直接用下面的命令运行。
+
+```
+flutter run -d chrome
+```
+
+#### 构建模式
+
+1. 默认模式 ``
+
+   - 使用 `flutter run -d chrome` 或 `flutter build web`（不带 `--wasm`）默认构建。
+   - 运行时使用 **CanvasKit** 渲染器。
+     ([Flutter 文档][1])
+
+2. WebAssembly（WASM）模式 `flutter run -d chrome`
+
+   - 通过添加 `--wasm` 参数启用：
+
+     ```bash
+     flutter run -d chrome --wasm
+     flutter build web --wasm
+     ```
+   - 该模式下运行时，会尝试用 **SkWasm** 渲染器（若浏览器支持垃圾回收），否则回退使用 CanvasKit。
+
+#### 可用渲染器
+
+- **CanvasKit**：基于 Skia 的 WebAssembly 引擎，适配性广、视觉体验一致，但会增加约 1.5MB 包体。
+- **SkWasm**：一个更精简的 Skia WASM 渲染器，支持多线程渲染，在启用了 WASM 模式下可能优先使用。
+
+#### 构建推荐方式总结
+
+| 构建命令                           | 渲染器行为解释                          |
+| ------------------------------ | -------------------------------- |
+| `flutter build web`            | 默认模式，CanvasKit 渲染器               |
+| `flutter build web --wasm`     | WASM 模式，优先使用 SkWasm，回退 CanvasKit |
+| `flutter run -d chrome`        | 默认 HTML 模式已废弃 → 使用 CanvasKit     |
+| **不再支持** `--web-renderer html` | 因 HTML 渲染器已废弃，无法使用               |
+
+#### 建议与选择场景
+
+* 推荐使用默认模式（CanvasKit）：稳定性好，视觉表现与移动端一致。
+* 若希望更小包体、快速加载：可尝试 WASM 模式看看 SkWasm 是否可用。
+* 避免再使用 HTML 渲染器，它已经不再可选。
+
+
+[1]: https://docs.flutter.dev/platform-integration/web/renderers "Web renderers"
+
+#### 输出目录
+
+web 编译和运行时会放在：
+
+```
+build/web/
+├── index.html
+├── main.dart.js
+├── flutter_service_worker.js
+└── assets/
+```
+直接部署到任意静态服务器（如 Nginx、Apache、Vercel、Netlify）即可。
