@@ -2,7 +2,7 @@ import 'package:action_in_flutter/presentation/demo/pages/index_page.dart';
 import 'package:action_in_flutter/utils/device/platform_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:action_in_flutter/presentation/common/adaptive_counter.dart';
+import 'package:action_in_flutter/presentation/common/adaptive-counter.dart';
 import 'package:action_in_flutter/constants/app_theme_data.dart';
 
 void main() {
