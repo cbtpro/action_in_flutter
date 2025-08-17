@@ -1,3 +1,4 @@
+import 'package:action_in_flutter/constants/colors/usage_example.dart';
 import 'package:flutter/cupertino.dart';
 
 class EventsPage extends StatelessWidget {
@@ -10,12 +11,7 @@ class EventsPage extends StatelessWidget {
       //   middle: Text('事件'),
       // ),
       child: Center(
-        child: CupertinoButton.filled(
-          onPressed: () {
-            // 你的点击逻辑
-          },
-          child: const Text('按钮'),
-        ),
+        child: const ColorUsageExample(),
       ),
     );
   }

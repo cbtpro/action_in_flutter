@@ -1,3 +1,5 @@
+import 'package:action_in_flutter/constants/colors/colors_useage_widget.dart';
+import 'package:action_in_flutter/constants/colors/flutter_component_demo.dart';
 import 'package:flutter/cupertino.dart';
 
 class SquarePage extends StatelessWidget {
@@ -10,13 +12,9 @@ class SquarePage extends StatelessWidget {
       //   middle: Text('首页'),
       // ),
       child: Center(
-        child: CupertinoButton.filled(
-          onPressed: () {
-            // 你的点击逻辑
-          },
-          child: const Text('按钮'),
-        ),
-      ),
+        // child: ColorUsageWidget(),
+        child: FlutterComponentsDemo(),
+      )
     );
   }
 }

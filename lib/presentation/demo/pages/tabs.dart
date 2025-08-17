@@ -60,9 +60,10 @@ class _TabsState extends State<Tabs> {
     return CupertinoTabScaffold(
       controller: _cupertinoTabController,
       tabBar: CupertinoTabBar(
+        backgroundColor: theme.colorScheme.surface,
         items: _tabItems
             .map((item) => BottomNavigationBarItem(
-                  icon: Icon(item.cupertinoIcon, size: theme.iconTheme.size, color: theme.colorScheme.surface),
+                  icon: Icon(item.cupertinoIcon, size: theme.iconTheme.size, color: theme.colorScheme.onTertiary),
                   label: item.label,
                 ))
             .toList(),
