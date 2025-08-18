@@ -130,3 +130,88 @@ build/web/
 └── assets/
 ```
 直接部署到任意静态服务器（如 Nginx、Apache、Vercel、Netlify）即可。
+
+## 更换端口
+
+默认端口是 5000，你可以用 `--web-port` 参数更改：
+
+```bash
+flutter run -d web-server --web-port=8888
+```
+
+👉 服务会运行在 `http://localhost:8888`
+
+## 更改监听地址
+
+默认监听 `localhost`，如果你想在局域网内访问，可以指定 `--web-hostname`：
+
+```bash
+flutter run -d web-server --web-port=8888 --web-hostname=0.0.0.0
+```
+
+👉 这样其他设备（手机、平板）就能通过 `http://<你的局域网IP>:888` 访问。
+
+如果想监听 IPv6：
+
+```bash
+flutter run -d web-server --web-hostname=:: --web-port=8888
+```
+
+## 启用 HTTPS
+
+Flutter 内置了支持https，但是需要你提供证书和私钥,提供证书自动开启,用法如下：
+
+```bash
+flutter run -d web-server \
+  --web-port=8443 \
+  --web-server-certificate=cert.pem \
+  --web-server-key=key.pem
+```
+
+启动后访问 `https://localhost:8443`
+
+📌 注意：
+
+* 证书和私钥文件需要自己提前生成，比如用 `openssl`：
+
+  ```bash
+mkdir -p cert
+
+openssl req -x509 -newkey rsa:2048 \
+  -keyout cert/key.pem \
+  -out cert/cert.pem \
+  -days 365 \
+  -nodes
+  ```
+
+---
+
+## 启用 IPv6
+
+Flutter web-server 支持 IPv6，有bug,无法正确解析`::`,正常来安下面的命令即可,但是不影响,生产环境用容器开启ipv6即可.
+
+```bash
+flutter run -d web-server --web-hostname=:: --web-port=8888
+```
+
+这样会同时监听 IPv4、IPv6 地址，可以通过 `http://[你的IPv6地址]:8888` 访问。
+
+---
+
+## 5. 完整示例
+
+例如你要在 0.0.0.0 上监听、用 8443 端口、启用 HTTPS：
+
+```bash
+flutter run -d web-server \
+  --web-hostname=:: \
+  --web-port=8443 \
+  --web-tls-cert-path=cert/cert.pem \
+  --web-tls-cert-key-path=cert/key.pem
+```
+
+
+## 生产环境部署
+
+* 上面这些主要用于 **开发调试**。
+* 真正部署到生产时，通常用 `flutter build web` 生成 `build/web` 文件夹，再交给 **Nginx、Apache、Caddy** 或 **Firebase Hosting** 之类的 Web 服务器管理端口、HTTPS、IPv6。
